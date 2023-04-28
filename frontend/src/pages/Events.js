@@ -21,9 +21,10 @@ export async function loader() {
     if (!response.ok) {
         // return { isError: true, message: 'Failed to load events' };
         // throw new Error('Failed to load events');
-        // eslint-disable-next-line no-throw-literal
-        throw { message: 'Failed to load events' };
+        throw new Response(JSON.stringify({ message: 'Could not fetch events.' }), { status: 500 });
     } else {
         return response;
     }
 }
+
+// we use throw new Response() to throw an error with a custom response body and status code. This is useful if you want to return a custom error message to the client.
