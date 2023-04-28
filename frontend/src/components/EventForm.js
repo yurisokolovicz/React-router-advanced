@@ -1,5 +1,5 @@
-import { useNavigate } from 'react-router-dom';
-
+import { useNavigate, Form } from 'react-router-dom';
+// Form is a component from react-router-dom that wraps a form and adds some useful functionality to it.
 import styles from './EventForm.module.css';
 
 function EventForm({ method, event }) {
@@ -7,9 +7,9 @@ function EventForm({ method, event }) {
     function cancelHandler() {
         navigate('..');
     }
-
+    // The Form method will not send the request to the server (backend). It will only handle the form submission (the action) and prevent the default behavior of the browser.
     return (
-        <form className={styles.form}>
+        <Form method="post" className={styles.form}>
             <p>
                 <label htmlFor="title">Title</label>
                 <input id="title" type="text" name="title" required defaultValue={event ? event.title : ''} />
@@ -32,7 +32,7 @@ function EventForm({ method, event }) {
                 </button>
                 <button>Save</button>
             </div>
-        </form>
+        </Form>
     );
 }
 
