@@ -11,6 +11,7 @@ function EventsPage() {
 export default EventsPage;
 
 export async function loader() {
+    // We can not use useSession() here, because this not a React component. (only limitation)
     const response = await fetch('http://localhost:8080/events');
     if (!response.ok) {
         // ...
