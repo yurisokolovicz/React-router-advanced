@@ -52,9 +52,16 @@ const router = createBrowserRouter([
                         element: <EventsPage />,
                         loader: eventsLoader
                     },
-                    { path: ':eventId', element: <EventDetailPage />, loader: eventDetailLoader },
-                    { path: 'new', element: <NewEventPage /> },
-                    { path: ':eventId/edit', element: <EditEventPage /> }
+                    {
+                        path: ':eventId',
+                        id: 'event-detail',
+                        loader: eventDetailLoader,
+                        children: [
+                            { index: true, element: <EventDetailPage /> },
+                            { path: 'edit', element: <EditEventPage /> }
+                        ]
+                    },
+                    { path: 'new', element: <NewEventPage /> }
                 ]
             }
         ]
@@ -66,3 +73,5 @@ function App() {
 }
 
 export default App;
+
+// We can get access to a higher level loader from a route that does not have a loader. You use useRouteLoaderData instead of useLoaderData. But now we can reuse that loader across multiple routes which all needs the same data. And reusing code is of course always a good thing.
