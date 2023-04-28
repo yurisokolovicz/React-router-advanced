@@ -4,11 +4,7 @@ import EventItem from '../components/EventItem';
 const EventDetailPage = () => {
     const data = useRouteLoaderData('event-detail');
 
-    return (
-        <>
-            <EventItem event={data.event} />
-        </>
-    );
+    return <EventItem event={data.event} />;
 };
 
 export default EventDetailPage;
@@ -26,7 +22,7 @@ export async function loader({ request, params }) {
 }
 
 // The code for deleting an event
-export async function action(params, request) {
+export async function action({ params, request }) {
     const eventId = params.eventId;
     const response = await fetch('http://localhost:8080/events/' + eventId, {
         method: request.method
